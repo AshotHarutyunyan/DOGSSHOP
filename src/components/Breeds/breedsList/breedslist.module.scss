@@ -1,0 +1,63 @@
+.breedsList{
+    max-height: 80vh;
+    overflow: auto;
+    margin: 1rem 0;
+    padding: 2rem;
+}
+.item{
+    position: relative;
+}
+.itemName , .subItemName{
+    font-weight: 500;
+    color: #000000;
+    position: relative;
+    padding-left: 1rem;
+    cursor: pointer;
+    &::after{
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 10px;
+        height: 10px;
+        border: 1px solid #000000;
+        border-radius: 50%;
+        transform: translateY(50%);
+    }
+}
+.subItems{
+    max-height: 0px;
+    overflow: hidden;
+    padding-left: 1rem;
+}
+.subItems.active{
+    max-height: 100%;
+}
+.itemName.active,.subItemName.active{
+    &::before{
+        content: '';
+        position: absolute;
+        left: 3px;
+        top: 8.5px;
+        width: 6px;
+        height: 6px;
+        background: #000000;
+        border-radius: 50%;
+    }
+}
+/* width */
+.breedsList::-webkit-scrollbar {
+    width: 5px;
+}
+/* Track */
+.breedsList::-webkit-scrollbar-track {
+background: #f1f1f1;
+}
+/* Handle */
+.breedsList::-webkit-scrollbar-thumb {
+background: #888;
+}
+/* Handle on hover */
+.breedsList::-webkit-scrollbar-thumb:hover {
+background: #555;
+}

@@ -1,21 +1,15 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import Breeds from './breeds';
 
 function BreedsContainer(props) {
-    console.log(props.breeds)
-    for (const key in props.breeds) {
-        console.log(key,props.breeds[key]);
-      }
-
     return (
-        <div>
-            
-        </div>
+        <Breeds />
     )
 }
-let mapStateToProps = (state) => ({
-    breeds: state.breeds.breeds
-})
 
-export default connect(mapStateToProps,{})(BreedsContainer)
+// let mapStateToProps = (state) => ({
+//     breeds: state.breeds.breeds
+// })
+// connect(mapStateToProps,{})(BreedsContainer)
+export default BreedsContainer
 

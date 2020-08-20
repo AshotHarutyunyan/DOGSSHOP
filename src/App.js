@@ -17,7 +17,7 @@ const App = (props) => {
                     <Route path="/home" render={() => < HomeContainer />} />
                     <Route path="/contactus" render={() => < Contuctus />} />
                     <Route path="/favorites" render={() => < Favorites />} />
-                    <Route path="/breeds/:breed?/:page?" render={() => < BreedsContainer />} />
+                    <Route path="/breeds/:breed/:subbreed/:page" render={() => < BreedsContainer />} />
             </div>
             <Footer />
         </div>
