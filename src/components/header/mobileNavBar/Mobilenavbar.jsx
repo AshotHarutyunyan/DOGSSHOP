@@ -12,7 +12,7 @@ function Mobilenavbar(props) {
                     <button className={s.closeBtn} onClick={props.hideNavModal}>X</button>
                 </div>
                 <a href="tel:+18447953392" className={`${s.ModalNavLink}`}>(844) 795-3392</a>
-                <NavLink to='/breeds/all' activeClassName={s.active} className={`${s.ModalNavLink}`} onClick={props.hideNavModal}>
+                <NavLink to='/breeds/all/page/1' activeClassName={s.active} className={`${s.ModalNavLink}`} onClick={props.hideNavModal}>
                     Dogs
                 </NavLink>
                 <NavLink to='/contactus' activeClassName={s.active} className={`${s.ModalNavLink}`} onClick={props.hideNavModal}>

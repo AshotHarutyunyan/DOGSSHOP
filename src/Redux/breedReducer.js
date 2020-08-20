@@ -1,8 +1,11 @@
+import { DOGSAPI } from "../api/ApiDatas";
+
 let pushToBreed= "pushToBreed",
     pushToSubBreed= "pushToSubBreed";
 
 let initialState = {
     breeds: {
+        "all": [],
         "affenpinscher": [],
         "african": [],
         "airedale": [],
@@ -193,3 +196,12 @@ export const breedsReducer = (state = initialState, action) => {
             return state;
     }
 };
+
+export let setBreedAc = (breed) => ( { type:pushToBreed , breed });
+
+export let setBreed = (breed,qty=20) => (state) => {
+    DOGSAPI.getByBreed(breed,20).then((data) => { 
+        console.log(data) 
+    });
+};
+

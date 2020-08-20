@@ -6,13 +6,8 @@ const instance = axios.create({
 
 
 export const DOGSAPI = {
-    getRandomImages(qty) {
+    getAll(qty) {
         return instance.get(`breeds/image/random/${qty}`).then(response => {
-            return response.data;
-        });
-    },
-    getBreedsList() {
-        return instance.get(`breeds/list/all`).then(response => {
             return response.data;
         });
     },

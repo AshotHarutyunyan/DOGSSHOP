@@ -19,7 +19,7 @@ export default function Header(props) {
             <div className={`${s.headerContainer}`}>
                 <div className={s.headerItem}>
                     <NavLink to='/home' className={`${s.logo} ${s.headerLink}`}><LogoSvg /></NavLink>
-                    <NavLink to='/breeds/all' activeClassName={s.active} className={`${s.headerLink} ${s.hideInmobile}`}>Dogs</NavLink>
+                    <NavLink to='/breeds/all/page/1' activeClassName={s.active} className={`${s.headerLink} ${s.hideInmobile}`}>Dogs</NavLink>
                     <NavLink to='/contactus' activeClassName={s.active} className={`${s.headerLink} ${s.hideInmobile}`}>Contact us</NavLink>
                 </div>
                 <div className={`${s.headerItem} ${s.hideInmobile}`}>

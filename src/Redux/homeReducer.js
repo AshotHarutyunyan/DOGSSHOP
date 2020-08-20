@@ -24,7 +24,7 @@ const setswiperInfo = (swiperInfo) => { return { type: swiperInfoText, swiperInf
 
 export const getSwiperInfo = (qty) => (dispatch) => {
     dispatch(changeRequestStatus(false))
-    DOGSAPI.getRandomImages(qty).then((response) => {
+    DOGSAPI.getAll(qty).then((response) => {
         let info = response.message.map((item) => {
             let splicedItem = item.split('/');
             let breed = splicedItem[splicedItem.length - 2]

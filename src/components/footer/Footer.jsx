@@ -19,10 +19,10 @@ export default function Footer() {
                 </div>
                 <div className={s.footerItem}>
                     <div className={s.footerLinks}>
-                        <NavLink to={'/home'}>home</NavLink>
-                        <NavLink to={'/contactus'}>contactus</NavLink>
-                        <NavLink to={'/favorites'}>favorites</NavLink>
-                        <NavLink to={'/breeds'}>breeds</NavLink>
+                        <NavLink activeClassName={s.active} to={'/home'}>home</NavLink>
+                        <NavLink activeClassName={s.active} to={'/contactus'}>contactus</NavLink>
+                        <NavLink activeClassName={s.active} to={'/favorites'}>favorites</NavLink>
+                        <NavLink activeClassName={s.active} to={'/breeds'}>breeds</NavLink>
                     </div>    
                 </div>
             </div>
