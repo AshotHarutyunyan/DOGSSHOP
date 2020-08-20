@@ -1,0 +1,169 @@
+body{
+    overflow-anchor: none;
+}
+// .AboutUs
+.AboutUs{
+    font-size: 21px;
+    line-height: 1.5;
+    max-width: 1020px;
+    margin: 4rem auto;
+    border: 1px solid #66af37;
+    padding: 4rem;
+    text-align: center;
+    position: relative;
+    &::after{
+        content: '';
+        background: url(/static/media/promise-logo.52f1b58e.svg) no-repeat;
+        background-size: cover;
+        position: absolute;
+        left: 50%;
+        top: 0%;
+        width: 100px;
+        height: 100px;
+        transform: translate(-50%,-50%);
+    }
+}
+// .accardionContain
+.accardionContain {
+    max-width: 1020px;
+    margin: 4rem auto;
+    display: flex;
+    flex-wrap: wrap;
+    .accardionBtns{
+        padding: 1rem;
+        border-right: 1px solid #66af37;
+        margin-right: 1rem;
+        min-width: max-content;
+        width: 40%;
+    }
+    .accardionBtn{
+        button{
+            font-size: 24px;
+            padding: 10px 0;
+            &:hover{
+                color: rgb(255, 145, 0);
+            }
+        }
+    }
+    .activeaccardionBtn{
+        button{
+            color: #66af37;
+            pointer-events: none;
+        }
+    }
+}
+.accardionContentMobile{
+    display: none;
+}
+.accardionContent{
+    width: 45%;
+    font-size: 18px;
+}
+// ContactUsContain
+.ContactUsContain{
+    max-width: 1920px;
+    margin: 0 auto;
+    background-color: #e6fffd;
+    .ContactUsInfo{
+        margin: 0 auto;
+        max-width: 800px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 5rem 1rem;
+        position: relative;
+        text-align: center;
+        p,a{
+            position: relative;
+            z-index: 1;
+        }
+        p{
+            font-size: 20px;
+            font-weight: bold;
+        }
+        a{
+            background-color: rgb(255, 145, 0);
+            color: #000000;
+            padding: 0.5rem;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 15px;
+            margin-top: 1rem;
+            transition:all 0.5s;
+            &:hover{
+                text-decoration: none;
+                background-color: #000000;
+                color: #ffffff;
+            }
+        }
+        &::after{
+            content: '';
+            position: absolute;
+            background: url(../../images/dog-medium.svg) no-repeat;
+            background-size: cover;
+            width: 300px;
+            height: 150px;
+            right: 0;
+        }
+    }
+}
+@media only screen and (max-width: 1020px) {
+    .AboutUs{
+        margin: 4rem 2rem;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .accardionContent{
+        display: none;
+    }
+    .accardionContentMobile{
+        display: block;
+        padding: 10px 0;
+        font-size: 18px;
+    }
+    .accardionContain{
+        .accardionBtns{
+            width: 100%;
+            border-right: none;
+            display: flex;
+            flex-direction: column;
+            min-width: unset;
+            margin-right: 0;
+
+        }
+        .accardionBtn{
+            border-bottom: 1px solid #ceebbd
+        }
+        .accardionBtn:nth-child(1){
+            order: 2;
+        }
+        .accardionBtn:nth-child(2){
+            order: 4;
+        }
+        .accardionBtn:nth-child(3){
+            order: 6;
+        }
+        .accardionBtn:nth-child(4){
+            order: 8;
+        }
+        .accardionBtn:nth-child(5){
+            order: 10;
+        }
+    }
+}
+@media only screen and (max-width: 600px) {
+    .AboutUs{
+        padding: 3rem 0rem;
+        font-size: 16px;
+    }
+}
+@media only screen and (max-width: 400px) {
+    .accardionContain {
+        .accardionBtn{
+            button{
+                font-size: 18px;
+            }
+        }
+    }
+}
