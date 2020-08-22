@@ -1,0 +1,13 @@
+.DogsList{
+    width: 75%;
+    margin-left: 2%;
+    margin-top: 3rem;
+}
+@media only screen and (max-width: 991px){
+    .DogsList{
+        width: 100%;
+        margin-left: 0;
+        padding-left: 1%;
+        margin-top: 0;
+    }
+}

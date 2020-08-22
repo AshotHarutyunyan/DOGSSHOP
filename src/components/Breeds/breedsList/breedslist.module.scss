@@ -1,14 +1,23 @@
 .breedsList{
-    max-height: 80vh;
-    overflow: auto;
     margin: 1rem 0;
-    padding: 2rem;
+    padding: 1rem;
+    width: 20%;
+    max-height: 80vh;
+    display: flex!important;
+    flex-direction: column;
+}
+.breedsListSrollBar{
+    overflow: auto;
+    flex-grow: 1;
+}
+.applyFilters{
+    display: none;
 }
 .item{
     position: relative;
 }
 .subItems{
-    max-height: 100%;
+    max-height: 0px;
     overflow: hidden;
     padding-left: 1rem;
 }
@@ -30,11 +39,11 @@
         transform: translateY(50%);
     }
 }
-.default.active ,.offClear{
+.default.active ,.offClear,.item.itemName.active,.subItemName.active{
     pointer-events: none;
 }
 .subItems.active{
-    max-height: 0%;
+    max-height: 100%;
 }
 .itemName.active a,.subItemName.active a{
     &::before{
@@ -62,19 +71,59 @@
         }
     }
 }
-/* width */
-.breedsList::-webkit-scrollbar {
+
+.filterBtnContain{
+    display: none;
+    button{
+       background-color: #66af37;
+       padding: 1rem;
+       margin: 1rem 0;
+       color:#ffffff
+    }
+}
+
+
+.breedsListSrollBar::-webkit-scrollbar {
     width: 5px;
 }
-/* Track */
-.breedsList::-webkit-scrollbar-track {
+.breedsListSrollBar::-webkit-scrollbar-track {
 background: #f1f1f1;
 }
-/* Handle */
-.breedsList::-webkit-scrollbar-thumb {
+.breedsListSrollBar::-webkit-scrollbar-thumb {
 background: #888;
 }
-/* Handle on hover */
-.breedsList::-webkit-scrollbar-thumb:hover {
+.breedsListSrollBar::-webkit-scrollbar-thumb:hover {
 background: #555;
+}
+
+@media only screen and (max-width: 991px){
+    .breedsList{
+        position: fixed;
+        display: none!important;
+        padding-top: 0;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        max-height: 100vh;
+        background: #ffffff;
+    }
+    .breedsList.active{
+        display: flex!important;
+        z-index: 1111111111111;
+    }
+    .applyFilters{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 50px;
+        button{
+            font-weight: bold;
+            border: 1px solid;
+            padding: 0.5rem;
+        }
+    }
+    .filterBtnContain{
+        display: block;
+    }
 }

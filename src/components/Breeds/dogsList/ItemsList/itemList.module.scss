@@ -1,0 +1,79 @@
+.DogsItems{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.DogsItem{
+    position: relative;
+    border: 1px solid #d8d8d8;
+    margin: 0.25rem;
+    padding: 0;
+    -webkit-box-flex: 1!important;
+    -ms-flex: 1 1 0px!important;
+    flex: 1 1 0!important;
+    max-width: 24%;
+    min-width: 20%;
+    border-radius: 10px;
+}
+.DogsItemInfo{
+    width: 100%;
+    color: #000000;
+    padding: 0 0.5rem;
+    &Breed{
+        border-bottom: 1px solid #ffffff;
+        padding-bottom: 5px;
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+}
+.DogsItemImg{
+    height: 200px;
+    img{
+        width: 100%;
+        height: 200px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }   
+}
+
+.favorite {
+    position: absolute;
+    height: 3em;
+    width: 4em;
+    right: 0px;
+    top: 0px;
+    border-radius: 0 25px 0 8em;
+    background-color: #fff;
+    background-image: url(../../../../images/favorite-heart.svg);
+    background-repeat: no-repeat;
+    background-position: 20px 7px;
+    z-index: 5;
+}
+.favorite:hover , .favorite.active {
+    background-image: url(../../../../images/favorite-heart-filled.svg);
+}
+
+@media only screen and (max-width: 1178px){
+    .DogsItem {
+        max-width: 32%;
+        min-width: 29%;
+    }
+}
+@media only screen and (max-width: 669px){
+    .DogsItem {
+        max-width: 48%;
+        min-width: 40%;
+    }
+}
+@media (max-width: 600px){
+    .DogsItemInfo{
+        &Breed{
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+    }
+}
+
+

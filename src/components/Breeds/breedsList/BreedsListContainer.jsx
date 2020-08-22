@@ -5,30 +5,123 @@ import BreedsList from './BreedsList';
 import { nanoid } from 'nanoid';
 import { NavLink, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
+import { useState } from 'react';
 
 function BreedsListContainer(props) {
+
     let {breed,subbreed,page} = props.match.params;
     let breeds = props.breeds;
-    let items = [];
+    const [Items, setItems] = useState([])
     
+    
+    function PaintFilterList({ someProp }) {
+        useEffect(() => {
+            function filterList() {
+                let items = [];
+                for (let key in breeds) {
+                    if (breeds[key].hasOwnProperty('all')) {
+                        let subItems = [];
+                        for (let item in breeds[key]) {
+                            if (item !== 'all') {
+                                let ClassName = item === subbreed && key === breed ? `${s.subItemName} ${s.active}` : `${s.subItemName}` ;
+                                subItems.push(
+                                <div id={item} className={ClassName} key={nanoid()} >
+                                    <NavLink to={`/breeds/${key}/${item}/1`} >{item}</NavLink>
+                                </div>)
+                            }
+                        }
+                        let itemClassName = `${s.item}`;
+                        let itemNameClassName = `${s.itemName}`;
+                        let subItemsClassName = `${s.subItems}`;
+                        if(key === breed && subbreed === 'page'){
+                            itemClassName = `${s.item} ${s.active}`;
+                            itemNameClassName = `${s.itemName} ${s.active} ${s.default}`; 
+                            subItemsClassName = `${s.subItems} ${s.active}`;  
+                        }else if(key === breed && subbreed !== 'page'){
+                            itemClassName = `${s.item} ${s.active}`;
+                            itemNameClassName = `${s.itemName} ${s.active}`;
+                            subItemsClassName = `${s.subItems} ${s.active}`;
+                        }
+                        items.push(
+                            <div id={key} className={itemClassName} key={nanoid()}  >
+                                <div className={itemNameClassName}><NavLink to={`/breeds/${key}/page/1`}>{key}</NavLink></div>
+                                <div className={subItemsClassName}>{subItems}</div>
+                            </div>
+                        )
+                    } else {
+                        let ClassName = '';
+                        if(key === "all" && breed === "all" ){
+                            ClassName = `${s.item} ${s.itemName} ${s.default} ${s.active}`;
+                        }else if ( key === "all"){
+                            ClassName = `${s.item} ${s.itemName} ${s.default}`;
+                        }else if(key === breed){
+                            ClassName = `${s.item} ${s.itemName} ${s.active}`;
+                        }else{
+                            ClassName = `${s.item} ${s.itemName} `;
+                        }
+                        items.push(
+                            <div id={key} className={ClassName} key={nanoid()} >
+                                <NavLink  to={`/breeds/${key}/page/1`}>{key}</NavLink>
+                            </div>
+                        )
+                    }
+                }
+                setItems(items)
+            }
+            filterList()
+        }, [someProp]);
+    }
+    PaintFilterList(breeds,Items,setItems,breed,subbreed)
+
+
+    let removeAcitveClass = (removeSubItems) => {
+        if (removeSubItems) {
+            let subItem = document.querySelector(`.${s.subItemName}.${s.active}`)
+            if (subItem) {
+                subItem.classList.remove(s.active)
+            }
+        } else {
+            let subItem = document.querySelector(`.${s.subItemName}.${s.active}`)
+            if (subItem) {
+                subItem.classList.remove(s.active)
+            }
+            let subFilter = document.querySelector(`.${s.subItems}.${s.active}`)
+            if (subFilter) {
+                subFilter.classList.remove(s.active)
+            }
+            let filter = document.querySelector(`.${s.itemName}.${s.active}`)
+            if (filter) {
+                filter.classList.remove(s.active)
+            }
+            let item = document.querySelector(`.${s.item}.${s.active}`)
+            if (item) {
+                item.classList.remove(s.active)
+            }
+        }
+    };
     
 
     useEffect(() => {
         function selectItems() {
             let Item =  document.querySelector(`#${breed}`),   
                 subitem = document.querySelector(`#${breed} #${subbreed}`),
-                subItems =  document.querySelector(`#${breed}`).children[1],
-                itemName =  document.querySelector(`#${breed}`).children[0];
+                subItems = Item && document.querySelector(`#${breed}`).children[1],
+                itemName = Item &&  document.querySelector(`#${breed}`).children[0];
             if(subitem){
+                removeAcitveClass(true)
                 Item.classList.add(s.active)
                 itemName.classList.add(s.active)
-                subItems.classList.remove(s.active)
+                itemName.classList.remove(s.default)
+                subItems.classList.add(s.active)
                 subitem.classList.add(s.active)
             }else if(subItems){
+                removeAcitveClass()
                 Item.classList.add(s.active)
                 itemName.classList.add(s.active)
-                subItems.classList.remove(s.active)
+                subItems.classList.add(s.active)
+                itemName.classList.add(s.default)
             }else if(Item){
+                removeAcitveClass()
                 Item.classList.add(s.active)
             }
         }
@@ -36,44 +129,9 @@ function BreedsListContainer(props) {
     }, [breed,subbreed,page])
 
 
-    for (let key in breeds) {
-        if (breeds[key].hasOwnProperty('all')) {
-            let subItems = [];
-            for (let item in breeds[key]) {
-                if (item !== 'all') {
-                    let link = item === subbreed ? `/breeds/${key}/page/1` : `/breeds/${key}/${item}/1` ;
-                    subItems.push(
-                    <div id={item} className={s.subItemName} key={nanoid()} >
-                        <NavLink to={link} >{item}</NavLink>
-                    </div>)
-                }
-            }
-            let breedlink = `/breeds/${key}/page/1`;
-            if(key === breed && subbreed === 'page' ){
-                breedlink = `/breeds/all/page/1`;
-            }
-            items.push(
-                <div id={key} className={s.item} key={nanoid()}  >
-                    <div className={s.itemName}><NavLink to={breedlink}>{key}</NavLink></div>
-                    <div className={`${s.subItems} ${s.active}`}>{subItems}</div>
-                </div>
-            )
-        } else {
-            let breedlink = `/breeds/${key}/page/1`;
-            if(key === breed && subbreed === 'page' ){
-                breedlink = `/breeds/all/page/1`;
-            }
-            items.push(
-                <div id={key} className={key === "all" ? `${s.item} ${s.itemName} ${s.default}` : `${s.item} ${s.itemName}` } key={nanoid()} >
-                    <NavLink  to={breedlink}>{key}</NavLink>
-                </div>
-            )
-        }
-    }
-    
     
     return (
-        <BreedsList breedslist={items}/>
+        <BreedsList breedslist={Items}/>
     )
 }
 let mapStateToProps = (state) => ({
