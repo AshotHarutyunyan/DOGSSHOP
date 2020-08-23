@@ -26,11 +26,11 @@ export default function Header(props) {
                     <a href="tel:+18447953392" className={`${s.headerLink}`}>(844) 795-3392</a>
                     <NavLink to='/favorites' activeClassName={s.active} className={`${s.headerLink}`}>
                         Favorites
-                        <span className={s.heart}><span className={s.favoritesCount}>0</span></span>
+                        <span className={s.heart}><span className={s.favoritesCount}>{props.favorites}</span></span>
                     </NavLink>
                 </div>
                 <div className={s.mobileNav}>
-                    <span className={s.heart}><span className={s.favoritesCount}>0</span></span>
+                    <span className={s.heart}><span className={s.favoritesCount}>{props.favorites}</span></span>
                     <button className={s.burgerBtn} onClick={showNavModal}>
                         <span></span>
                         <span></span>

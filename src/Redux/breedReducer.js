@@ -1,10 +1,9 @@
-import { DOGSAPI } from "../api/ApiDatas";
-
-const SET_BREED = "SET_BREED",
+export const SET_BREED = "SET_BREED",
     SET_SUBBREEDS = "SET_SUBBREEDS",
     SET_FAVORITE = "SET_FAVORITE",
     SET_FAVORITE_WITHSUBBREEDS = "SET_FAVORITE_WITHSUBBREEDS",
     REQUEST = "REQUEST";
+
 
 let initialState = {
     breeds: {
@@ -248,67 +247,5 @@ export const breedsReducer = (state = initialState, action) => {
         default:
             return state;
     }
-};
-
-const setBreedAc = (breedObj, breedName) => ({ type: SET_BREED, breedObj, breedName });
-const setSubBreedAc = (subBreedName, subBreedObj, breedName) => ({ type: SET_SUBBREEDS, subBreedName, subBreedObj, breedName });
-const setRequestAc = (request) => { return { type: REQUEST, request } };
-export const setFavoriteAc = (id,breedName,page) => ({ type: SET_FAVORITE, id , breedName ,page })
-export const setFavoriteWithSubbreedsAc = (id,breedName,page,subBreedName) => ({ type: SET_FAVORITE_WITHSUBBREEDS, id , breedName , page , subBreedName })
-
-
-let createBreadObj = (response, breedObj, page, breedName, withSubbreeds, subbreed) => {
-    let items = response.message.map((item , idx ) => {
-        let splicedItem = item.split('/');
-        let breed = splicedItem[splicedItem.length - 2];
-        let subbreed = '';
-        if (breed.indexOf("-") > 0) {
-            subbreed = breed.split('-');
-            breed = subbreed[0]
-            subbreed = subbreed[1]
-        }
-        return {
-            id: idx ,
-            breed,
-            subbreed,
-            img: item,
-            favorite: false,
-        }
-    });
-    let newObj = { ...breedObj }
-    if (withSubbreeds) {
-        newObj['all'][`${page}`] = {};
-        newObj['all'][`${page}`] = items;
-    } else {
-        newObj[`${page}`] = {};
-        newObj[`${page}`] = items;
-    }
-    return newObj
-};
-
-export const setAll = (breedObj, page, qty, breedName) => (dispatch) => {
-    dispatch(setRequestAc(false))
-    DOGSAPI.getAll(qty).then((response) => {
-        dispatch(setBreedAc(createBreadObj(response, breedObj, page, breedName), breedName))
-        dispatch(setRequestAc(true))
-    })
-};
-
-export const setBreed = (breedObj, page, qty, breedName, withSubbreeds) => (dispatch) => {
-    dispatch(setRequestAc(false))
-    DOGSAPI.getByBreed(breedName, qty).then((response) => {
-        dispatch(setBreedAc(createBreadObj(response, breedObj, page, breedName, withSubbreeds), breedName))
-        dispatch(setRequestAc(true))
-    })
-};
-
-export const setSubBreed = (breedObj, page, breedName, withSubbreeds, subbreed, qty) => (dispatch) => {
-    dispatch(setRequestAc(false))
-    DOGSAPI.getBySubBreed(breedName, subbreed, qty).then((response) => {
-        let newObj = createBreadObj(response, breedObj, page, breedName, withSubbreeds, subbreed)
-        console.log(newObj)
-        dispatch(setSubBreedAc(subbreed, newObj, breedName))
-        dispatch(setRequestAc(true))
-    })
 };
 

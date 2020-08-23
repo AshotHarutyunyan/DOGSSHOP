@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
-import { getSwiperInfo } from '../../Redux/homeReducer';
+import { getSwiperInfo } from '../../Redux/actionCreators';
 import BigSwiper from './swiper/bigSwiper/bigswiper';
 import MobileSwiper from './swiper/mobileSwiper/mobileswiper';
 import Preloader from '../common/preloader/Preloader';
