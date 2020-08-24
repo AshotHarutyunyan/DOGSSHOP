@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const AccardionContent = (props) => {
     return (
@@ -14,3 +15,9 @@ const AccardionContent = (props) => {
 }
 
 export default AccardionContent
+
+AccardionContent.propTypes = {
+    accardionclass: PropTypes.string,
+    order: PropTypes.number,
+    checkedItem: PropTypes.number,
+}

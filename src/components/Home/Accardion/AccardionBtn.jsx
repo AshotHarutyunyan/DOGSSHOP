@@ -1,5 +1,6 @@
 import React from 'react'
 import s from '../Home.module.scss'
+import PropTypes from 'prop-types'
 
 const AccardionBtn = (props) => {
     let bolleanActiveClass = String(props.value) === String(props.checkedItem)
@@ -11,3 +12,9 @@ const AccardionBtn = (props) => {
 }
 
 export default AccardionBtn
+
+AccardionBtn.propTypes = {
+    value: PropTypes.string,
+    order: PropTypes.number,
+    changeItem: PropTypes.func,
+}

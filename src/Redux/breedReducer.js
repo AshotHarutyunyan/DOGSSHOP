@@ -210,38 +210,46 @@ export const breedsReducer = (state = initialState, action) => {
                 }
             }
         case SET_FAVORITE:
-            return {
-                ...state,
-                breeds: {
-                    ...state.breeds, [`${action.breedName}`]: {
-                        ...state.breeds[`${action.breedName}`],
-                        [`${action.page}`]: state.breeds[action.breedName][action.page].map( item => {
-                            if ( item.id === action.id ) {
-                                return { ...item, favorite: !item.favorite }
-                            }
-                            return item;
-                        })
+            let stateForBreed = {...state}
+            if(state.breeds[action.breedName][action.page]){
+                stateForBreed = {
+                    ...state,
+                    breeds: {
+                        ...state.breeds, [`${action.breedName}`]: {
+                            ...state.breeds[`${action.breedName}`],
+                            [`${action.page}`]: state.breeds[action.breedName][action.page].map( item => {
+                                if ( item.id === action.id ) {
+                                    return { ...item, favorite: !item.favorite }
+                                }
+                                return item;
+                            })
+                        }
                     }
                 }
             }
+            return stateForBreed
             case SET_FAVORITE_WITHSUBBREEDS:
-                return {
-                    ...state,
-                    breeds: {
-                        ...state.breeds, [action.breedName]: {
-                            ...state.breeds[action.breedName],
-                            [action.subBreedName]: {
-                                ...state.breeds[action.breedName][action.subBreedName],
-                                [action.page]: state.breeds[action.breedName][action.subBreedName][action.page].map( item => {
-                                    if ( item.id === action.id ) {
-                                        return { ...item, favorite: !item.favorite }
-                                    }
-                                    return item;
-                                })
+                let stateForSubBreed = {...state};
+                if(state.breeds[action.breedName][action.subBreedName][action.page]){
+                    stateForSubBreed = {
+                        ...state,
+                        breeds: {
+                            ...state.breeds, [action.breedName]: {
+                                ...state.breeds[action.breedName],
+                                [action.subBreedName]: {
+                                    ...state.breeds[action.breedName][action.subBreedName],
+                                    [action.page]: state.breeds[action.breedName][action.subBreedName][action.page].map( item => {
+                                        if ( item.id === action.id ) {
+                                            return { ...item, favorite: !item.favorite }
+                                        }
+                                        return item;
+                                    })
+                                }
                             }
                         }
                     }
-                }    
+                }
+                return stateForSubBreed  
         case REQUEST:
             return { ...state, request: action.request };
         default:

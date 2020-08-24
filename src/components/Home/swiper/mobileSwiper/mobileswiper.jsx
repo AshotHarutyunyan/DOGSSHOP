@@ -1,12 +1,13 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import s from './../swiper.module.scss';
-// Import Swiper styles
-import 'swiper/swiper.scss';
-import 'swiper/components/navigation/navigation.scss';
+import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import useWindowDimensions from '../../../common/windowWidthAndHeight';
 import MoibleSwiperSlide from './mobileswiperitem';
+// Import Swiper styles
+import 'swiper/swiper.scss';
+import 'swiper/components/navigation/navigation.scss';
 
 
 
@@ -37,8 +38,8 @@ const MobileSwiper = (props) => {
     );
 };
 
-
-
-
-
 export default MobileSwiper 
+
+MobileSwiper.propTypes = {
+    data: PropTypes.array,
+}

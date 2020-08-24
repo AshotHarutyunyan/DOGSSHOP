@@ -6,6 +6,8 @@ import { nanoid } from 'nanoid';
 import { NavLink, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
+import { GET_BREEDS } from '../../../Redux/selectors';
 
 function BreedsListContainer(props) {
 
@@ -124,6 +126,7 @@ function BreedsListContainer(props) {
                 removeAcitveClass()
                 Item.classList.add(s.active)
             }
+            window.scrollTo(0, 0)
         }
         selectItems()
     }, [breed,subbreed,page])
@@ -135,9 +138,13 @@ function BreedsListContainer(props) {
     )
 }
 let mapStateToProps = (state) => ({
-    breeds: state.breeds.breeds
+    breeds: GET_BREEDS(state),
 })
 
 export default compose(
     withRouter,
     connect(mapStateToProps, {}))(BreedsListContainer);
+
+BreedsListContainer.propTypes = {
+    breeds: PropTypes.object,
+}

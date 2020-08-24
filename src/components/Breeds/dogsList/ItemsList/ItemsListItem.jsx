@@ -7,12 +7,17 @@ function ItemsListItem(props) {
 
     let toggleFavorite = (event) => {
         let favorite = {
-           id: event.target.children[0].value,
-           img: event.target.children[1].value,
-           breed: event.target.children[2].value,
-           subbreed: event.target.children[3].value,
-           status: event.target.children[4].value,
-        }
+           id:  item.id,
+           img:  item.img,
+           breed: item.breed,
+           subbreed: item.subbreed,
+           status:  item.favorite,
+           breedObjName: breed,
+           subbreedObjName: subbreed,
+           page,
+           withSubbreds: selectedBreed['all'] ? true : false
+        };
+
         if (subbreed !== 'page' && breed !== 'all') {
             props.setFavoriteWithSubbreeds(favorite.status,favorite,favorite.id,breed,page,subbreed)
         } else if (subbreed === 'page' && breed !== 'all' && !selectedBreed['all']) {
@@ -27,13 +32,7 @@ function ItemsListItem(props) {
 
     return (
         <div className={s.DogsItem}>
-            <div className={!item.favorite ? `${s.favorite}` : `${s.favorite} ${s.active}`} onClick={toggleFavorite}>
-                <input type="hidden" name="id" value={item.id} />
-                <input type="hidden" name="img" value={item.img} />
-                <input type="hidden" name="breed" value={item.breed} />
-                <input type="hidden" name="subbreed" value={item.subbreed} />
-                <input type="hidden" name="status" value={item.favorite} />
-            </div>
+            <div className={!item.favorite ? `${s.favorite}` : `${s.favorite} ${s.active}`} onClick={toggleFavorite}></div>
             <div className={s.DogsItemImg}>
                 <img src={item.img} alt="" />
             </div>

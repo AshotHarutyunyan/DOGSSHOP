@@ -3,10 +3,12 @@ import s from './Header.module.scss';
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as LogoSvg } from '../../images/logo.svg';
 import Mobilenavbar from './mobileNavBar/Mobilenavbar';
+import PropTypes from 'prop-types';
 
 
 export default function Header(props) {
     const [navmodal, setnavmodal] = useState(false)
+
     const showNavModal = () => {
         setnavmodal(true)
     }
@@ -30,7 +32,11 @@ export default function Header(props) {
                     </NavLink>
                 </div>
                 <div className={s.mobileNav}>
-                    <span className={s.heart}><span className={s.favoritesCount}>{props.favorites}</span></span>
+                    <span className={s.heart}>
+                                <NavLink to='/favorites' activeClassName={s.active} className={`${s.favoritesCount}`} >
+                                    {props.favorites} 
+                                </NavLink>
+                        </span>
                     <button className={s.burgerBtn} onClick={showNavModal}>
                         <span></span>
                         <span></span>
@@ -43,3 +49,7 @@ export default function Header(props) {
     )
 }
 
+
+Header.propTypes = {
+    favorites: PropTypes.number,
+}

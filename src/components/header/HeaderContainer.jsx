@@ -2,17 +2,20 @@ import React, { useEffect } from 'react';
 import Header from "./Header";
 import { connect } from 'react-redux';
 import { getFavorites } from '../../Redux/actionCreators';
-
+import PropTypes from 'prop-types';
+import { GET_FAVORITES_SELECTOR } from '../../Redux/selectors';
 
 function HeaderContainer(props) {
-    
-    let favoritesLength = props.favorites;
+    let favoritesLength = props.favorites.length;
     function GetFavoritesInfo({ favoritesLength }) {
         useEffect(() => {
             function getinfo() {
-                let favorites = JSON.parse(localStorage.getItem('favorites')).favorites;
-                props.getFavorites(favorites)
-                console.log(favorites)
+                let favorites = JSON.parse(localStorage.getItem('favorites'));
+                if(favorites && props.favorites !== favorites.favorites){
+                    props.getFavorites(favorites.favorites)
+                }else{
+                    props.getFavorites([])
+                }
             }
             getinfo();
         }, [favoritesLength]);
@@ -21,12 +24,17 @@ function HeaderContainer(props) {
 
 
     return (
-         <Header {...props} />
+         <Header {...props} favorites={favoritesLength} />
     )
 }
 
 let mapStateToProps = (state) => ({
-    favorites: state.favorites.favorites.length
+    favorites: GET_FAVORITES_SELECTOR(state)
 })
 
 export default connect(mapStateToProps,{getFavorites})(HeaderContainer);
+
+HeaderContainer.propTypes = {
+    favorites: PropTypes.array,
+    getFavorites: PropTypes.func,
+}

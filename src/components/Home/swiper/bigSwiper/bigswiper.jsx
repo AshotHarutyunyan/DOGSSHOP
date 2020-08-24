@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import s from './../swiper.module.scss';
 import { SwiperFirstItem } from './bigSwiperFirstItem';
 import { SwiperSecondtItem } from './bigSwiperSecondItem';
+import PropTypes from 'prop-types';
 // Import Swiper styles
 import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
@@ -28,6 +29,8 @@ const BigSwiper = (props) => {
     );
 };
 
-
-
 export default BigSwiper 
+
+BigSwiper.propTypes = {
+    data: PropTypes.array,
+}

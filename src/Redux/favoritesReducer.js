@@ -1,13 +1,17 @@
 export const GET_FAVORITES = 'GET_FAVORITES';
 export const ADD_TO_FAVORITES = 'ADD_TO_FAVORITES';
 export const REMOVE_FROM_FAVORITES = 'REMOVE_FROM_FAVORITES';
+export const FAVORITES_STATUS = 'FAVORITES_STATUS';
 
 let initialState = {
     favorites: [],
+    status: false,
 };
 
 export const favoritesReducer = (state = initialState, action) => {
     switch (action.type) {
+        case FAVORITES_STATUS:
+            return { ...state, status: action.status };
         case GET_FAVORITES:
             return { ...state, favorites: action.favorites };
         case ADD_TO_FAVORITES:

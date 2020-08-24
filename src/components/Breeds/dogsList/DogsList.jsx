@@ -4,6 +4,7 @@ import PaginationContainer from '../../common/Pagination/PaginationContainer';
 import ItemsList from './ItemsList/ItemsList';
 import BreedListFIlterBtn from '../breedsList/BreedListFIlterBtn';
 import BreedsPageLoader from '../../common/BreedsLoader/BreedsPageLoader';
+import PropTypes from 'prop-types';
 
 function DogsList(props) {
     return (
@@ -19,5 +20,16 @@ function DogsList(props) {
 }
 
 
-
 export default DogsList
+
+DogsList.propTypes = {
+    selectedBreed: PropTypes.array,
+    request: PropTypes.bool,
+    selectedValues: PropTypes.object,
+    setFavoriteWithSubbreeds: PropTypes.func,
+    setFavorite: PropTypes.func,
+    allItemsCount: PropTypes.number,
+    defaultLink: PropTypes.string,
+    pageItemsCount: PropTypes.number,
+    currentPage: PropTypes.string,
+}

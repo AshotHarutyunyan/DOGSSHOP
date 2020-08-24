@@ -1,7 +1,7 @@
 import React from 'react'
 import s from './Mobilenavbar.module.scss'
 import { NavLink } from 'react-router-dom'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
 function Mobilenavbar(props) {
     return (
@@ -24,7 +24,8 @@ function Mobilenavbar(props) {
 }
 
 Mobilenavbar.propTypes = {
-
+    navmodal: PropTypes.bool,
+    hideNavModal: PropTypes.string,
 }
 
 export default Mobilenavbar

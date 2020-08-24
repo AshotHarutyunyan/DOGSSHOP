@@ -1,9 +1,9 @@
 
 
 import { DOGSAPI } from "../api/ApiDatas";
-import { SET_BREED,SET_SUBBREEDS,REQUEST,SET_FAVORITE,SET_FAVORITE_WITHSUBBREEDS } from "./breedReducer";
-import { STATUS_TEXT,SWIPER_INFO_TEXT } from "./homeReducer";
-import { GET_FAVORITES, ADD_TO_FAVORITES, REMOVE_FROM_FAVORITES } from "./favoritesReducer";
+import { SET_BREED, SET_SUBBREEDS, REQUEST, SET_FAVORITE, SET_FAVORITE_WITHSUBBREEDS } from "./breedReducer";
+import { STATUS_TEXT, SWIPER_INFO_TEXT } from "./homeReducer";
+import { GET_FAVORITES, ADD_TO_FAVORITES, REMOVE_FROM_FAVORITES, FAVORITES_STATUS } from "./favoritesReducer";
 import { nanoid } from "nanoid";
 
 // homeReducer
@@ -17,7 +17,7 @@ export const getSwiperInfo = (qty) => (dispatch) => {
         let info = response.message.map((item) => {
             let splicedItem = item.split('/');
             let breed = splicedItem[splicedItem.length - 2]
-            if(breed.indexOf("-")){
+            if (breed.indexOf("-")) {
                 breed = breed.split('-');
                 breed = breed[0]
             }
@@ -38,12 +38,12 @@ export const getSwiperInfo = (qty) => (dispatch) => {
 const setBreedAc = (breedObj, breedName) => ({ type: SET_BREED, breedObj, breedName });
 const setSubBreedAc = (subBreedName, subBreedObj, breedName) => ({ type: SET_SUBBREEDS, subBreedName, subBreedObj, breedName });
 const setRequestAc = (request) => { return { type: REQUEST, request } };
-const setFavoriteAc = (id,breedName,page) => ({ type: SET_FAVORITE, id , breedName ,page })
-const setFavoriteWithSubbreedsAc = (id,breedName,page,subBreedName) => ({ type: SET_FAVORITE_WITHSUBBREEDS, id , breedName , page , subBreedName })
+const setFavoriteAc = (id, breedName, page) => ({ type: SET_FAVORITE, id, breedName, page })
+const setFavoriteWithSubbreedsAc = (id, breedName, page, subBreedName) => ({ type: SET_FAVORITE_WITHSUBBREEDS, id, breedName, page, subBreedName })
 
 
 let createBreadObj = (response, breedObj, page, breedName, withSubbreeds, subbreed) => {
-    let items = response.message.map(( item ) => {
+    let items = response.message.map((item) => {
         let splicedItem = item.split('/');
         let breed = splicedItem[splicedItem.length - 2];
         let subbreed = '';
@@ -52,12 +52,23 @@ let createBreadObj = (response, breedObj, page, breedName, withSubbreeds, subbre
             breed = subbreed[0]
             subbreed = subbreed[1]
         }
+        let favorites = JSON.parse(localStorage.getItem('favorites'));
+        let favorite = false;
+        let id = nanoid();
+        if (favorites) {
+            favorites.favorites.forEach(element => {
+                if (element.img === item) {
+                    favorite = true;
+                    id = element.id;
+                }
+            });
+        }
         return {
-            id: nanoid() ,
+            id,
             breed,
             subbreed,
             img: item,
-            favorite: false,
+            favorite
         }
     });
     let newObj = { ...breedObj }
@@ -98,28 +109,34 @@ export const setSubBreed = (breedObj, page, breedName, withSubbreeds, subbreed, 
 
 // favoritesReducer
 
-export const getFavorites  = (favorites) => ({type: GET_FAVORITES , favorites});
-const addToFavoritesAc = (favorite) => ({type: ADD_TO_FAVORITES , favorite});
-const removeFromFavoritesAc = (id) => ({type: REMOVE_FROM_FAVORITES , id});
+const getFavoritesAc = (favorites) => ({ type: GET_FAVORITES, favorites });
+const addToFavoritesAc = (favorite) => ({ type: ADD_TO_FAVORITES, favorite });
+const removeFromFavoritesAc = (id) => ({ type: REMOVE_FROM_FAVORITES, id });
+const favoritesStatusAc = (status) => ({ type: FAVORITES_STATUS, status });
 
 
-export const setFavorite = (addOrRemove,favorite,id,breedName,page) => (dispatch) => {
-    if(addOrRemove === "false"){
+export const getFavorites = (favorites) => (dispatch) => {
+    dispatch(getFavoritesAc(favorites))
+    dispatch(favoritesStatusAc(true))
+};
+
+export const setFavorite = (addOrRemove, favorite, id, breedName, page) => (dispatch) => {
+    if (!addOrRemove) {
         dispatch(addToFavoritesAc(favorite))
-        dispatch(setFavoriteAc(id,breedName,page))
-    }else{
+        dispatch(setFavoriteAc(id, breedName, page))
+    } else {
         dispatch(removeFromFavoritesAc(id))
-        dispatch(setFavoriteAc(id,breedName,page))
+        dispatch(setFavoriteAc(id, breedName, page))
     }
 };
 
-export const setFavoriteWithSubbreeds = (addOrRemove,favorite,id,breedName,page,subBreedName) => (dispatch) => {
-    if(addOrRemove === "false"){
+export const setFavoriteWithSubbreeds = (addOrRemove, favorite, id, breedName, page, subBreedName) => (dispatch) => {
+    if (!addOrRemove) {
         dispatch(addToFavoritesAc(favorite))
-        dispatch(setFavoriteWithSubbreedsAc(id,breedName,page,subBreedName))
-    }else{
+        dispatch(setFavoriteWithSubbreedsAc(id, breedName, page, subBreedName))
+    } else {
         dispatch(removeFromFavoritesAc(id))
-        dispatch(setFavoriteWithSubbreedsAc(id,breedName,page,subBreedName))
+        dispatch(setFavoriteWithSubbreedsAc(id, breedName, page, subBreedName))
     }
 };
 

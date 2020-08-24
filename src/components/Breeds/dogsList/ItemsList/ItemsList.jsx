@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { nanoid } from 'nanoid';
 import s from './itemList.module.scss'
 import ItemsListItem from './ItemsListItem';
+import PropTypes from 'prop-types';
+
 
 function ItemsList(props) {
     let itemsList = props.itemsList;
@@ -33,3 +35,10 @@ function ItemsList(props) {
 
 
 export default ItemsList;
+
+ItemsList.propTypes = {
+    itemsList: PropTypes.array,
+    selectedValues: PropTypes.object,
+    setFavoriteWithSubbreeds: PropTypes.func,
+    setFavorite: PropTypes.func,
+}

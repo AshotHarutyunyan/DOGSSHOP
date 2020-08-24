@@ -5,6 +5,8 @@ import { withRouter } from 'react-router-dom';
 import DogsList from './DogsList';
 import { setAll,setBreed,setSubBreed,setFavoriteWithSubbreeds,setFavorite } from '../../../Redux/actionCreators'
 import Preloader from '../../common/preloader/Preloader';
+import PropTypes from 'prop-types';
+import { GET_BREEDS, GET_BREEDS_REQUEST_STATUS, GET_PAGE_ITEMS_COUNT } from '../../../Redux/selectors';
 
 function DogsListContainer(props) {
     let {breed,subbreed,page} = props.match.params;
@@ -52,7 +54,6 @@ function DogsListContainer(props) {
                     setselectedBreedPage(selectedBreed[page]);
                 }
             }
-            window.scrollTo(0, 0)
         }
         selectItems()
     }, [breed,subbreed,page,selectedBreed,setAll,setBreed,setSubBreed,pageItemsCount,breedLength])
@@ -71,11 +72,22 @@ function DogsListContainer(props) {
     )
 }
 let mapStateToProps = (state) => ({
-    breeds: state.breeds.breeds,
-    request: state.breeds.request,
-    pageItemsCount: state.breeds.pageItemsCount
+    breeds: GET_BREEDS(state),
+    request: GET_BREEDS_REQUEST_STATUS(state),
+    pageItemsCount: GET_PAGE_ITEMS_COUNT(state)
 })
 
 export default compose(
     withRouter,
     connect(mapStateToProps, {setAll,setBreed,setSubBreed,setFavoriteWithSubbreeds,setFavorite}))(DogsListContainer);
+
+DogsListContainer.propTypes = {
+    breeds: PropTypes.object,
+    request: PropTypes.bool,
+    pageItemsCount: PropTypes.number,
+    setAll: PropTypes.func,
+    setBreed: PropTypes.func,
+    setSubBreed: PropTypes.func,
+    setFavoriteWithSubbreeds: PropTypes.func,
+    setFavorite: PropTypes.func
+}    

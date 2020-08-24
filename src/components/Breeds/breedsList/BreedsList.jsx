@@ -1,6 +1,7 @@
-import React from 'react'
-import s from './breedslist.module.scss'
-import { NavLink } from 'react-router-dom'
+import React from 'react';
+import s from './breedslist.module.scss';
+import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 function BreedsList(props) {
     let hideFilters = () => {
@@ -21,3 +22,7 @@ function BreedsList(props) {
 
 
 export default BreedsList
+
+BreedsList.propTypes = {
+    breedslist: PropTypes.array,
+}

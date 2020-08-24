@@ -1,16 +1,19 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
+import s from './Favorites.module.scss'
+import EmptyFavorites from './FavoriteItems/EmptyFavorites' 
+import PropTypes from 'prop-types'
 
 function Favorites(props) {
+
     return (
-        <div>
-            Favorites
+        <div className={s.Favorites}>
+            {props.favorites.length > 0 ? props.favorites : <EmptyFavorites/>}
         </div>
     )
 }
 
 Favorites.propTypes = {
-
+    favorites: PropTypes.array,
 }
 
 export default Favorites
