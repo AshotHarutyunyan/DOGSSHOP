@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 import DogsList from './DogsList';
-import { setAll,setBreed,setSubBreed,setFavoriteWithSubbreeds,setFavorite } from '../../../Redux/actionCreators'
+import { setAll,setBreed,setSubBreed } from '../../../Redux/breedReducer'
+import { setFavoriteWithSubbreeds,setFavorite } from '../../../Redux/favoritesReducer'
 import Preloader from '../../common/preloader/Preloader';
 import PropTypes from 'prop-types';
 import { GET_BREEDS, GET_BREEDS_REQUEST_STATUS, GET_PAGE_ITEMS_COUNT } from '../../../Redux/selectors';

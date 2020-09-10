@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux';
-import { getSwiperInfo } from '../../Redux/actionCreators';
+import { getSwiperInfo } from '../../Redux/homeReducer';
 import PropTypes from 'prop-types';
 import Home from './Home';
 import Preloader from '../common/preloader/Preloader';

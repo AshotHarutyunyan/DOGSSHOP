@@ -1,3 +1,5 @@
+import { getFavoritesAc, favoritesStatusAc, addToFavoritesAc, setFavoriteAc, removeFromFavoritesAc, setFavoriteWithSubbreedsAc } from "./actionCreators";
+
 export const GET_FAVORITES = 'GET_FAVORITES';
 export const ADD_TO_FAVORITES = 'ADD_TO_FAVORITES';
 export const REMOVE_FROM_FAVORITES = 'REMOVE_FROM_FAVORITES';
@@ -32,6 +34,32 @@ export const favoritesReducer = (state = initialState, action) => {
             return removed_state
         default:
             return state;
+    }
+};
+
+
+export const getFavorites = (favorites) => (dispatch) => {
+    dispatch(getFavoritesAc(favorites))
+    dispatch(favoritesStatusAc(true))
+};
+
+export const setFavorite = (addOrRemove, favorite, id, breedName, page) => (dispatch) => {
+    if (!addOrRemove) {
+        dispatch(addToFavoritesAc(favorite))
+        dispatch(setFavoriteAc(id, breedName, page))
+    } else {
+        dispatch(removeFromFavoritesAc(id))
+        dispatch(setFavoriteAc(id, breedName, page))
+    }
+};
+
+export const setFavoriteWithSubbreeds = (addOrRemove, favorite, id, breedName, page, subBreedName) => (dispatch) => {
+    if (!addOrRemove) {
+        dispatch(addToFavoritesAc(favorite))
+        dispatch(setFavoriteWithSubbreedsAc(id, breedName, page, subBreedName))
+    } else {
+        dispatch(removeFromFavoritesAc(id))
+        dispatch(setFavoriteWithSubbreedsAc(id, breedName, page, subBreedName))
     }
 };
 

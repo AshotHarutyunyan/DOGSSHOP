@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Header from "./Header";
 import { connect } from 'react-redux';
-import { getFavorites } from '../../Redux/actionCreators';
+import { getFavorites } from '../../Redux/favoritesReducer';
 import PropTypes from 'prop-types';
 import { GET_FAVORITES_SELECTOR } from '../../Redux/selectors';
 

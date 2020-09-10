@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { setFavoriteWithSubbreeds,setFavorite } from '../../Redux/actionCreators';
+import { setFavoriteWithSubbreeds,setFavorite } from '../../Redux/favoritesReducer';
 import Preloader from '../common/preloader/Preloader';
 import Favorites from './Favorites';
 import FavoritesItem from './FavoriteItems/FavoritesItem';
